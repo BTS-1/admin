@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 import {MenuItems} from '../../shared/menu-items/menu-items';
+import { AuthService } from '../../theme/_services/auth.service';
+import { GeneralService } from '../../theme/_services/general.service';
 
 @Component({
   selector: 'app-admin',
@@ -119,7 +121,7 @@ export class AdminComponent implements OnInit {
 
   public config: any;
 
-  constructor(public menuItems: MenuItems) {
+  constructor(public menuItems: MenuItems, public aService: AuthService, public gService: GeneralService) {
     this.navType = 'st2';
     this.themeLayout = 'vertical';
     this.verticalPlacement = 'left';
@@ -169,25 +171,30 @@ export class AdminComponent implements OnInit {
 
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
-
-    // side-bar image
-    /*this.setLayoutType('img');*/
-
-    // dark
-    /*this.setLayoutType('dark');*/
-
-    // dark-light
-    /*this.setNavBarTheme('theme1');*/
-
-    // light-dark
-    /*this.setLayoutType('dark');
-    this.setNavBarTheme('themelight1');*/
-
   }
 
   ngOnInit() {
-    this.setBackgroundPattern('pattern1');
-    /*document.querySelector('body').classList.remove('dark');*/
+    if (!this.aService.loggedIn()) {
+      this.gService.login();
+    } else {
+      if (this.gService.getTheme() === 'dark') {
+        this.setLayoutType('dark');
+        this.setNavBarTheme('themedark');
+      } else {
+        this.setLayoutType('light');
+        this.setNavBarTheme('themelight1');
+      }
+      this.gService.$theme.subscribe(
+        x => {
+          if (x === 'dark') {
+            this.setLayoutType('dark');
+             this.setNavBarTheme('themedark');
+          } else {
+            this.setLayoutType('light');
+            this.setNavBarTheme('themelight1');
+          }
+        });
+    }
   }
 
   onResize(event) {
@@ -204,6 +211,13 @@ export class AdminComponent implements OnInit {
     if (reSizeFlag) {
       this.setMenuAttributes(this.windowWidth);
     }
+  }
+  loggedIn() {
+    return this.aService.loggedIn();
+  }
+  logout() {
+    this.aService.logout();
+    this.gService.login();
   }
 
   setHeaderAttributes(windowWidth) {

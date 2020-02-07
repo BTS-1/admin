@@ -42,7 +42,7 @@
               </a>
               <ul [@notificationBottom]="profileNotification" class="show-notification profile-notification">
                 <li>
-                  <a href="javascript:">
+                  <a href="javascript:" (click)="gService.setTheme('dark')">
                     <i class="ti-settings"></i> Settings
                   </a>
                 </li>
@@ -52,7 +52,7 @@
                   </a>
                 </li>
                 <li>
-                  <a [routerLink]="['/authentication/login/']">
+                  <a [routerLink]="['/authentication/login/']" (click)="logout()">
                     <i class="ti-layout-sidebar-left"></i> Logout
                   </a>
                 </li>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PodcastService } from '../../_services/podcast.service';
 
 @Component({
   selector: 'app-library',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LibraryComponent implements OnInit {
 
-  constructor() { }
+  constructor(public pService: PodcastService) { }
 
   ngOnInit() {
+    this.pService.getPodcasts().then(
+      x => console.log(x),
+      err => console.error(err)
+    );
   }
 
 }

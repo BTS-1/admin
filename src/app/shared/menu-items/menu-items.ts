@@ -46,6 +46,19 @@ const MENUITEMS = [
             name: 'Library'
           }
         ]
+      },
+      {
+        state: 'music',
+        short_label: 'm',
+        name: 'Music',
+        type: 'sub',
+        icon: 'ti-home',
+        children: [
+          {
+            state: 'list',
+            name: 'Music List'
+          }
+        ]
       }
     ]}
 ];

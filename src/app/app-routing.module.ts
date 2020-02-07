@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'podcast',
         loadChildren: './theme/podcast/podcast.module#PodcastModule'
+      },
+      {
+        path: 'music',
+        loadChildren: './theme/music/music.module#MusicModule'
       }
     ]
   },

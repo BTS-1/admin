@@ -5,7 +5,7 @@
       <div class="col-sm-12">
         <!-- Authentication card start -->
         <div class="login-card card-block auth-body mr-auto ml-auto">
-          <form class="md-float-material">
+          <form class="md-float-material"  *ngIf="registerForm" [formGroup]="registerForm">
             <div class="auth-box">
               <div class="row m-b-20">
                 <div class="col-md-12">
@@ -13,18 +13,22 @@
                 </div>
               </div>
               <hr/>
-              <div class="input-group">
-                <input type="email" class="form-control" placeholder="Your Email Address">
-                <span class="md-line"></span>
-              </div>
-              <div class="input-group">
-                <input type="password" class="form-control" placeholder="Password">
-                <span class="md-line"></span>
-              </div>
-              
+                <div class="input-group">
+                  <input type="text" class="form-control" formControlName="username" placeholder="Username">
+                  <span class="md-line"></span>
+                </div>
+                <div class="input-group">
+                  <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                  <span class="md-line"></span>
+                </div>             
               <div class="row m-t-30">
                 <div class="col-md-12">
-                  <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Register</button>
+                  <button type="button" (click)="register()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Register</button>
+                  <div *ngIf="this.registerForm.controls.clicked.value" class="errors">
+                    <div *ngIf="registerForm.controls.username.errors?.exists">Username already exists!</div>
+                    <div *ngIf="registerForm.controls.username.errors?.required">Username is required!</div>
+                    <div *ngIf="registerForm.controls.password.errors?.required">Password is required!</div>
+                  </div>
                 </div>
               </div>
               <hr/>

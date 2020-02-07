@@ -14,6 +14,12 @@ import { LoginComponent } from './theme/auth/login/login.component';
 import { RegisterComponent } from './theme/auth/register/register.component';
 import { ForgotPasswordComponent } from './theme/auth/forgot-password/forgot-password.component';
 import { GeneralService } from './theme/_services/general.service';
+import { PodcastService } from './theme/_services/podcast.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorInterceptorProvider } from './theme/_services/error.interceptor';
+import { AuthService } from './theme/_services/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MusicService } from './theme/_services/music.service';
 
 
 @NgModule({
@@ -29,10 +35,20 @@ import { GeneralService } from './theme/_services/general.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     SharedModule
   ],
-  providers: [MenuItems, GeneralService],
+  providers: [
+    MenuItems,
+    GeneralService,
+    PodcastService,
+    ErrorInterceptorProvider,
+    AuthService,
+    MusicService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
