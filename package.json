@@ -51,7 +51,7 @@
     "ngx-chips": "^1.5.10",
     "ngx-color-picker": "^5.0.4",
     "ngx-perfect-scrollbar": "^5.0.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "path": "^0.12.7",
     "rxjs": "^5.5.6",
     "screenfull": "^3.3.2",
